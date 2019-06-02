@@ -15,7 +15,8 @@ public class SignInTest {
         setDriverPath();
 
         driver.get("https://www.cleartrip.com/");
-        waitFor(2000);
+        //waitFor(2000);
+        driver.manage().timeouts().implicitlyWait(2,TimeUnit.MILISECOND) ;
 
         driver.findElement(By.linkText("Your trips")).click();
         driver.findElement(By.id("SignIn")).click();
@@ -39,10 +40,10 @@ public class SignInTest {
         if (PlatformUtil.isMac()) {
             System.setProperty("webdriver.chrome.driver", "chromedriver");
         }
-        if (PlatformUtil.isWindows()) {
+        else if (PlatformUtil.isWindows()) {
             System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         }
-        if (PlatformUtil.isLinux()) {
+       else if (PlatformUtil.isLinux()) {
             System.setProperty("webdriver.chrome.driver", "chromedriver_linux");
         }
     }
