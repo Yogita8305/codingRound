@@ -13,12 +13,17 @@ import java.util.List;
 public class FlightBookingTest {
 
     WebDriver driver = new ChromeDriver();
+    
+    @BeforeMethod
+    public void beforeMethod(){
+        setDriverPath();
+    }
 
 
     @Test
     public void testThatResultsAppearForAOneWayJourney() {
 
-        setDriverPath();
+        //setDriverPath();
         driver.get("https://www.cleartrip.com/");
         waitFor(2000);
         driver.findElement(By.id("OneWay")).click();
@@ -49,11 +54,16 @@ public class FlightBookingTest {
 
         waitFor(5000);
         //verify that result appears for the provided journey search
-        Assert.assertTrue(isElementPresent(By.className("searchSummary")));
-
+       Assert.assertTrue(isElementPresent(By.className("searchSummary")));
+        
         //close the browser
-        driver.quit();
+        //driver.quit();
 
+    }
+    @AfterMethod
+    public void afterMethod()
+    {
+        driver.quit();
     }
 
 
@@ -79,10 +89,10 @@ public class FlightBookingTest {
         if (PlatformUtil.isMac()) {
             System.setProperty("webdriver.chrome.driver", "chromedriver");
         }
-        if (PlatformUtil.isWindows()) {
+     else if (PlatformUtil.isWindows()) {
             System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         }
-        if (PlatformUtil.isLinux()) {
+    else if (PlatformUtil.isLinux()) {
             System.setProperty("webdriver.chrome.driver", "chromedriver_linux");
         }
     }
